@@ -27,12 +27,12 @@ public class Post extends Auditable {
     @Column(name = "status", nullable = false)
     private PostStatus status;
 
-    @OneToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne
-    @JoinColumn(name = "approved_by", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "approved_by")
     private User approvedBy = null;
 
     @ManyToOne

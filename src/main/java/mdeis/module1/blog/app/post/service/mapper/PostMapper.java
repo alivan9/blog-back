@@ -12,11 +12,13 @@ public class PostMapper {
         postApi.setId(post.getId());
         postApi.setTitle(post.getTitle());
         postApi.setDescription(post.getDescription());
+        postApi.setStatus(post.getStatus());
         postApi.setCategory(post.getCategory());
         postApi.setApprovedBy(post.getApprovedBy());
-        postApi.setUser(post.getUser());
+        postApi.setCreatedBy(post.getUser());
         postApi.setTags(post.getTags());
         postApi.setScores(post.getScores());
+        postApi.setCreatedAt(post.getCreatedAt());
         return postApi;
     }
 }

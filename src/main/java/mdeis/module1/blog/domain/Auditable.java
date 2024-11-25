@@ -29,7 +29,7 @@ public class Auditable {
 
     @LastModifiedBy
     @Column(name = "last_modified_by")
-    Integer lastModifiedBy = 0;
+    Integer lastModifiedBy = 1;
 
     @Column(name = "updated_at")
     @LastModifiedDate

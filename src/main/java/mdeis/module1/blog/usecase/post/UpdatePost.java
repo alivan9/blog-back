@@ -37,7 +37,6 @@ public class UpdatePost {
             post.setStatus(updatePostApi.getStatus());
             post.setCategory(category);
             post.setApprovedBy(approvedBy);
-            post.setStatus(updatePostApi.getStatus());
             post.setTags(tagList);
             post = postRepository.save(post);
         } catch (Exception e) {

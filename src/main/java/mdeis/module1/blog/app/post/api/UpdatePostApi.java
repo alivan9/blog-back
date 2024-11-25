@@ -14,12 +14,11 @@ public class UpdatePostApi {
     String title;
     @NotBlank
     String description;
-    @NotBlank
     PostStatus status;
-    @NotBlank
-    Integer approvedBy;
     @NotNull
-    Integer categoryId;
+    int approvedBy;
+    @NotNull
+    int categoryId;
     @NotNull
     List<Integer> tags;
 }

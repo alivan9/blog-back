@@ -5,7 +5,6 @@ import mdeis.module1.blog.app.post.api.PostApi;
 import mdeis.module1.blog.app.post.api.UpdatePostApi;
 import mdeis.module1.blog.app.post.service.mapper.PostMapper;
 import mdeis.module1.blog.domain.Post;
-import mdeis.module1.blog.domain.User;
 import mdeis.module1.blog.usecase.post.PostUseCase;
 import org.springframework.stereotype.Service;
 
