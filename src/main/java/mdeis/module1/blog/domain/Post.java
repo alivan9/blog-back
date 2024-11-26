@@ -1,5 +1,6 @@
 package mdeis.module1.blog.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -49,4 +50,8 @@ public class Post extends Auditable {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Score> scores;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Comment> comments;
 }

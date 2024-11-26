@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 public class Auditable {
     @CreatedBy
     @Column(name = "created_by", updatable = false, nullable = false)
-    int createdBy;
+    int createdBy = 1;
 
     @Column(name = "created_at", updatable = false, nullable = false)
     @CreatedDate

@@ -18,6 +18,7 @@ public class PostMapper {
         postApi.setCreatedBy(post.getUser());
         postApi.setTags(post.getTags());
         postApi.setScores(post.getScores());
+        postApi.setComments(post.getComments());
         postApi.setCreatedAt(post.getCreatedAt());
         return postApi;
     }

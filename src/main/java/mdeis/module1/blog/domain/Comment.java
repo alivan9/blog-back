@@ -1,5 +1,6 @@
 package mdeis.module1.blog.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,17 +19,12 @@ public class Comment extends Auditable {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "post_id", nullable = false)
-    private int postId;
-
-    @Column(name = "user_id", nullable = false)
-    private int userId;
-
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "post_id", nullable = false)
+    @JsonIgnore
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }

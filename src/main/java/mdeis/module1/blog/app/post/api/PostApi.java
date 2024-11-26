@@ -18,5 +18,6 @@ public class PostApi {
     User createdBy;
     List<Tag> tags;
     List<Score> scores;
+    List<Comment> comments;
     Timestamp createdAt;
 }
