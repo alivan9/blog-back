@@ -12,6 +12,8 @@ public class PostMapper {
         postApi.setId(post.getId());
         postApi.setTitle(post.getTitle());
         postApi.setDescription(post.getDescription());
+        postApi.setContent(post.getContent());
+        postApi.setFrontpage(post.getFrontpage());
         postApi.setStatus(post.getStatus());
         postApi.setCategory(post.getCategory());
         postApi.setApprovedBy(post.getApprovedBy());

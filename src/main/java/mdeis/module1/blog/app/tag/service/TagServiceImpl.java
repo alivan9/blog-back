@@ -7,6 +7,8 @@ import mdeis.module1.blog.domain.Tag;
 import mdeis.module1.blog.usecase.tag.TagUseCase;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TagServiceImpl implements TagService {
 
@@ -40,5 +42,8 @@ public class TagServiceImpl implements TagService {
         tagUseCase.deleteTag.invoke(tag);
     }
 
-
+    @Override
+    public List<TagApi> getAllTags() {
+        return tagUseCase.getAllTags.invoke().stream().map(tagMapper::map).toList();
+    }
 }
