@@ -41,7 +41,7 @@ public class PostController {
         return new ResponseEntity<>("Post deleted.", HttpStatus.OK);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "filters", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<FilterPostResponseApi>> getPostByFiler(@RequestBody FilterPostRequestApi filterPostRequestApi) {
         return new ResponseEntity<>(postService.getPostByFilter(filterPostRequestApi), HttpStatus.OK);
     }

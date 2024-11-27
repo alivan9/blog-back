@@ -6,8 +6,6 @@ import java.util.List;
 
 @Data
 public class FilterPostRequestApi {
-
     List<Integer> categories;
     List<Integer> tags;
-    String title;
 }

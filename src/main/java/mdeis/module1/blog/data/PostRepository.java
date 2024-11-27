@@ -11,12 +11,10 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Query("SELECT p FROM Post p " +
-            "WHERE (:title IS NULL OR LOWER(p.title) LIKE LOWER(CONCAT('%', :title, '%'))) " +
-            "AND (:categories IS NULL OR p.category.id IN :categories) " +
+            "WHERE (:categories IS NULL OR p.category.id IN :categories) " +
             "AND (:tags IS NULL OR EXISTS (" +
             "   SELECT t FROM p.tags t WHERE t.id IN :tags))")
-    List<Post> findByTitleAndCategoryAndList(
-            @Param("title") String title,
+    List<Post> findByCategoryAndList(
             @Param("categories") List<Integer> categories,
             @Param("tags") List<Integer> tags
     );
