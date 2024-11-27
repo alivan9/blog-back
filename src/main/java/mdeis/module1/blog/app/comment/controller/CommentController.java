@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/comments", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CommentController {
+public class  CommentController {
 
     private final CommentService commentService;
 

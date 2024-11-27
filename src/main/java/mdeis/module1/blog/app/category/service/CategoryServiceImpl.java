@@ -7,6 +7,8 @@ import mdeis.module1.blog.domain.Category;
 import mdeis.module1.blog.usecase.category.CategoryUseCase;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -40,5 +42,8 @@ public class CategoryServiceImpl implements CategoryService {
         categoryUseCase.deleteCategory.invoke(category);
     }
 
-
+    @Override
+    public List<CategoryApi> getAllCategories() {
+        return categoryUseCase.getAllCategories.invoke().stream().map(categoryMapper::map).toList();
+    }
 }

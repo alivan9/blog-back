@@ -1,14 +1,14 @@
 package mdeis.module1.blog.app.post.controller;
 
 import jakarta.validation.Valid;
-import mdeis.module1.blog.app.post.api.NewPostApi;
-import mdeis.module1.blog.app.post.api.PostApi;
-import mdeis.module1.blog.app.post.api.UpdatePostApi;
+import mdeis.module1.blog.app.post.api.*;
 import mdeis.module1.blog.app.post.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/posts", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,5 +39,10 @@ public class PostController {
     ResponseEntity<String> deletePost(@PathVariable Integer postId) {
         postService.deletePost(postId);
         return new ResponseEntity<>("Post deleted.", HttpStatus.OK);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<FilterPostResponseApi>> getPostByFiler(@RequestBody FilterPostRequestApi filterPostRequestApi) {
+        return new ResponseEntity<>(postService.getPostByFilter(filterPostRequestApi), HttpStatus.OK);
     }
 }

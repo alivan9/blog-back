@@ -8,11 +8,13 @@ public class CategoryUseCase {
     public final GetCategoryById getCategoryById;
     public final UpdateCategory updateCategory;
     public final DeleteCategory deleteCategory;
+    public final GetAllCategories getAllCategories;
 
-    public CategoryUseCase(CreateCategory createCategory, GetCategoryById getCategoryById, UpdateCategory updateCategory, DeleteCategory deleteCategory) {
+    public CategoryUseCase(CreateCategory createCategory, GetCategoryById getCategoryById, UpdateCategory updateCategory, DeleteCategory deleteCategory, GetAllCategories getAllCategories) {
         this.createCategory = createCategory;
         this.getCategoryById = getCategoryById;
         this.updateCategory = updateCategory;
         this.deleteCategory = deleteCategory;
+        this.getAllCategories = getAllCategories;
     }
 }

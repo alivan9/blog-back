@@ -1,22 +1,25 @@
 package mdeis.module1.blog.app.post.service;
 
-import mdeis.module1.blog.app.post.api.NewPostApi;
-import mdeis.module1.blog.app.post.api.PostApi;
-import mdeis.module1.blog.app.post.api.UpdatePostApi;
+import mdeis.module1.blog.app.post.api.*;
+import mdeis.module1.blog.app.post.service.mapper.PostFilterMapper;
 import mdeis.module1.blog.app.post.service.mapper.PostMapper;
 import mdeis.module1.blog.domain.Post;
 import mdeis.module1.blog.usecase.post.PostUseCase;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
 
     private final PostUseCase postUseCase;
     private final PostMapper postMapper;
+    private final PostFilterMapper postFilterMapper;
 
-    public PostServiceImpl(PostUseCase postUseCase, PostMapper postMapper) {
+    public PostServiceImpl(PostUseCase postUseCase, PostMapper postMapper, PostFilterMapper postFilterMapper) {
         this.postUseCase = postUseCase;
         this.postMapper = postMapper;
+        this.postFilterMapper = postFilterMapper;
     }
 
     @Override
@@ -41,5 +44,9 @@ public class PostServiceImpl implements PostService {
         postUseCase.deletePost.invoke(post);
     }
 
+    @Override
+    public List<FilterPostResponseApi> getPostByFilter(FilterPostRequestApi filterPostRequestApi) {
+        return postUseCase.getPostByFilters.invoke(filterPostRequestApi).stream().map(postFilterMapper::map).toList();
+    }
 
 }

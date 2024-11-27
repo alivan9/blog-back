@@ -14,6 +14,9 @@ public class UpdatePostApi {
     String title;
     @NotBlank
     String description;
+    @NotBlank
+    String content;
+    String frontpage;
     PostStatus status;
     @NotNull
     int approvedBy;

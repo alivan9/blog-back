@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/tags", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TagController {
@@ -38,5 +40,10 @@ public class TagController {
     ResponseEntity<String> deleteCategory(@PathVariable Integer tagId) {
         tagService.deleteTag(tagId);
         return new ResponseEntity<>("Tag deleted.", HttpStatus.OK);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<TagApi>> getAllTags() {
+        return new ResponseEntity<>(tagService.getAllTags(), HttpStatus.OK);
     }
 }

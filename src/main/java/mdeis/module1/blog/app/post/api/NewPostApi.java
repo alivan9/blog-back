@@ -13,6 +13,9 @@ public class NewPostApi {
     String title;
     @NotBlank
     String description;
+    @NotBlank
+    String content;
+    String frontpage;
     @NotNull
     Integer categoryId;
     @NotNull
