@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/categories", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CategoryController {
@@ -38,5 +40,10 @@ public class CategoryController {
     ResponseEntity<String> deleteCategory(@PathVariable Integer categoryId) {
         categoryService.deleteCategory(categoryId);
         return new ResponseEntity<>("Category deleted.", HttpStatus.OK);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<CategoryApi>> getAllCategories() {
+        return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK);
     }
 }

@@ -34,6 +34,8 @@ public class UpdatePost {
         try {
             post.setTitle(updatePostApi.getTitle());
             post.setDescription(updatePostApi.getDescription());
+            post.setContent(updatePostApi.getContent());
+            post.setFrontpage(updatePostApi.getFrontpage());
             post.setStatus(updatePostApi.getStatus());
             post.setCategory(category);
             post.setApprovedBy(approvedBy);

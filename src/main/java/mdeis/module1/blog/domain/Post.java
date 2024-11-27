@@ -24,6 +24,12 @@ public class Post extends Auditable {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "content", nullable = false, length = 1000000)
+    private String content;
+
+    @Column(name = "frontpage", length = 1000000)
+    private String frontpage;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private PostStatus status;

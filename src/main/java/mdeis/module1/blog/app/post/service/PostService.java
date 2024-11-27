@@ -1,8 +1,8 @@
 package mdeis.module1.blog.app.post.service;
 
-import mdeis.module1.blog.app.post.api.NewPostApi;
-import mdeis.module1.blog.app.post.api.PostApi;
-import mdeis.module1.blog.app.post.api.UpdatePostApi;
+import mdeis.module1.blog.app.post.api.*;
+
+import java.util.List;
 
 public interface PostService {
 
@@ -13,4 +13,6 @@ public interface PostService {
     PostApi updatePost(Integer postId, UpdatePostApi updatePostApi);
 
     void deletePost(Integer postId);
+
+    List<FilterPostResponseApi> getPostByFilter(FilterPostRequestApi filterPostRequestApi);
 }

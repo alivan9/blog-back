@@ -12,6 +12,8 @@ public class PostApi {
     Integer id;
     String title;
     String description;
+    String content;
+    String frontpage;
     PostStatus status;
     Category category;
     User approvedBy;

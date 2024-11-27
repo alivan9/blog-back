@@ -34,6 +34,8 @@ public class CreatePost {
         try {
             post.setTitle(newPostApi.getTitle());
             post.setDescription(newPostApi.getDescription());
+            post.setContent(newPostApi.getContent());
+            post.setFrontpage(newPostApi.getFrontpage());
             post.setStatus(PostStatus.CREATED);
             post.setCategory(category);
             post.setUser(user);

@@ -8,11 +8,13 @@ public class TagUseCase {
     public final GetTagById getTagById;
     public final UpdateTag updateTag;
     public final DeleteTag deleteTag;
+    public final GetAllTags getAllTags;
 
-    public TagUseCase(CreateTag createTag, GetTagById getTagById, UpdateTag updateTag, DeleteTag deleteTag) {
+    public TagUseCase(CreateTag createTag, GetTagById getTagById, UpdateTag updateTag, DeleteTag deleteTag, GetAllTags getAllTags) {
         this.createTag = createTag;
         this.getTagById = getTagById;
         this.updateTag = updateTag;
         this.deleteTag = deleteTag;
+        this.getAllTags = getAllTags;
     }
 }
