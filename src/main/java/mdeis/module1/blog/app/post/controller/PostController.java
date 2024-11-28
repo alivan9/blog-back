@@ -38,10 +38,10 @@ public class PostController {
     @DeleteMapping(value = "/{postId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> deletePost(@PathVariable Integer postId) {
         postService.deletePost(postId);
-        return new ResponseEntity<>("Post deleted.", HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "filters", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<FilterPostResponseApi>> getPostByFiler(@RequestBody FilterPostRequestApi filterPostRequestApi) {
         return new ResponseEntity<>(postService.getPostByFilter(filterPostRequestApi), HttpStatus.OK);
     }
