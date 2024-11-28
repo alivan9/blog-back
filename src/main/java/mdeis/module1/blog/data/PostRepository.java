@@ -13,7 +13,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Query("SELECT p FROM Post p " +
             "WHERE (:categories IS NULL OR p.category.id IN :categories) " +
             "AND (:tags IS NULL OR EXISTS (" +
-            "   SELECT t FROM p.tags t WHERE t.id IN :tags))")
+            "   SELECT t FROM p.tags t WHERE t.id IN :tags))" +
+            "AND (p.deletedAt IS NULL)"+
+            "AND (p.status = 'CREATED')")
     List<Post> findByCategoryAndList(
             @Param("categories") List<Integer> categories,
             @Param("tags") List<Integer> tags

@@ -38,7 +38,7 @@ public class PostController {
     @DeleteMapping(value = "/{postId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<String> deletePost(@PathVariable Integer postId) {
         postService.deletePost(postId);
-        return new ResponseEntity<>("Post deleted.", HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping(value = "filters", produces = MediaType.APPLICATION_JSON_VALUE)
