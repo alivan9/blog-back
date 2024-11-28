@@ -19,11 +19,7 @@ public class GetPostByFilters {
 
     public List<Post> invoke(FilterPostRequestApi filterPostRequestApi) {
         List<Post> posts = postRepository.findByCategoryAndList(filterPostRequestApi.getCategories(), filterPostRequestApi.getTags());
-        if (!posts.isEmpty()) {
-            return posts;
-        } else {
-            throw new EntityNotFoundException("Post not found with filters");
-        }
+         return posts;
     }
 
 }
