@@ -8,7 +8,6 @@ import mdeis.module1.blog.domain.UserStatus;
 import mdeis.module1.blog.domain.exception.SaveEntityException;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
