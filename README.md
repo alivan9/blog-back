@@ -71,6 +71,64 @@ java -jar target/block-back-1.0.0.jar
 
 ---
 
+## CI con Jenkins (build + artefacto + smoke local)
+
+Este proyecto usa un **Jenkinsfile** en la **raíz** del repo para ejecutar un pipeline CI sencillo en **Windows**.
+
+### Requisitos del agente Jenkins
+- **SO**: Windows (el pipeline usa `bat` y `mvnw.cmd`).
+- **Java 21** disponible en `PATH` (`java -version`).
+- **Git** instalado (`git --version`).
+- **MySQL** accesible desde el agente (por defecto `localhost:3306` con DB `blog`, user `root`, pass `root`).
+  - Si tu MySQL está en otra máquina, ajusta las variables del Jenkinsfile: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS`.
+
+### ¿Qué hace el pipeline?
+1. **Checkout** de la rama `master`.
+2. **Build prod-like sin tests**: `mvnw clean package -Dmaven.test.skip=true`.
+3. **Stamp & Archive**: renombra el artefacto a `blog-back-<BUILD>-<GITSHA>.jar`, genera `SHA-256` y **publica artifacts**.
+4. **Smoke run**:
+   - Arranca el `.jar` con variables de entorno (URL, creds y `SERVER_PORT=8081`).
+   - Tiene **timeout de 40s** y `catchError` para marcar el stage como **UNSTABLE** si expira (el build total queda **SUCCESS**).
+   - Esto valida arranque/conexión sin dejar procesos colgados.
+
+> **Nota**: el smoke usa **8081** por defecto para evitar conflictos locales. Cambia `SERVER_PORT` si lo necesitas.
+
+### Cómo conectarlo a tu repo en Jenkins
+**Opción A — Pipeline from SCM (recomendada)**
+1. Crear **New Item → Pipeline**.
+2. En **Definition**, elegir **Pipeline script from SCM**.
+3. **SCM**: Git → URL del repo → Branch: `master`.
+4. **Script Path**: `Jenkinsfile`.
+5. Guardar y **Build Now**.
+
+**Opción B — Pipeline script**
+- Copia el contenido del `Jenkinsfile` en el campo **Pipeline script** del job.
+
+### Variables clave (en el Jenkinsfile)
+- `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASS`: conexión a MySQL (default: `localhost:3306`, DB `blog`, user `root`, pass `root`).
+- `APP_PROFILE`: perfil activo de Spring (vacío por defecto).
+- `SERVER_PORT`: puerto de la app durante el smoke (default `8081`).
+
+> Edita estos valores en el `Jenkinsfile` según tu entorno.
+
+### Artefactos generados
+- `blog-back-<BUILD>-<GITSHA>.jar`
+- `blog-back-<BUILD>-<GITSHA>.jar.sha256.txt`
+
+Puedes verificar la integridad en Windows:
+```bat
+certutil -hashfile "blog-back-<BUILD>-<GITSHA>.jar" SHA256
+type "blog-back-<BUILD>-<GITSHA>.jar.sha256.txt"
+
+Para ejecutar:
+
+java -jar ./blog-back-<BUILD>-<GITSHA>.jar \
+  --spring.datasource.url='jdbc:mysql://localhost:3306/blog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC' \
+  --spring.datasource.username=root \
+  --spring.datasource.password=root \
+  --spring.jpa.hibernate.ddl-auto=update \
+  --server.port=8081
+
 ## 👥 Equipo
 
 | Nombre             |
