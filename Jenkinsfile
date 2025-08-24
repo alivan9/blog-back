@@ -13,7 +13,7 @@ pipeline {
         DB_PORT = '3306'
         DB_NAME = 'blog'
         DB_USER = 'root'
-        DB_PASS = ''
+        DB_PASS = 'root'
     }
 
     stages {
