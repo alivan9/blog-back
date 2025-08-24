@@ -120,7 +120,12 @@ def emptyFolder(String path) {
 }
 
 def copyFile(String sourcePath, String targetPath) {
-    String command = "Copy-Item -Path '${sourcePath}' -Destination '${targetPath}' -Force"
+    String command = """
+        if (-Not (Test-Path '${targetPath}')) {
+            New-Item -ItemType Directory -Path '${targetPath}' | Out-Null
+        }
+        Copy-Item -Path '${sourcePath}' -Destination '${targetPath}' -Force
+    """
     powershell(returnStdout:true, script:command)
-    println('Copy file done.')
+    println("Copy file done to ${targetPath}.")
 }
