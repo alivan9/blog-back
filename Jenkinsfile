@@ -78,9 +78,9 @@ pipeline {
                     timeout(time: 40, unit: 'SECONDS') {
                         withEnv([
                             "SPRING_PROFILES_ACTIVE=default",
-                            "SPRING_DATASOURCE_URL=jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
-                            "SPRING_DATASOURCE_USERNAME=${DB_USER}",
-                            "SPRING_DATASOURCE_PASSWORD=${DB_PASS}",
+                            "SPRING_DATASOURCE_URL=jdbc:mysql://${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+                            "SPRING_DATASOURCE_USERNAME=${env.DB_USER}",
+                            "SPRING_DATASOURCE_PASSWORD=${env.DB_PASS}",
                             "SPRING_JPA_HIBERNATE_DDL_AUTO=update",
                             "SERVER_PORT=8081"
                         ]) {
