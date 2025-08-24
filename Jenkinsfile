@@ -54,9 +54,20 @@ pipeline {
         }
         stage('Clean-Up deploy folder') {
             steps {
-                script {
-                    emptyFolder("${params.TARGET_PATH}")
-                }
+                // script {
+                //     emptyFolder("${params.TARGET_PATH}")
+                // }
+                 steps {
+                    script {
+                        powershell """
+                            if (-Not (Test-Path '${params.TARGET_PATH}')) {
+                                New-Item -ItemType Directory -Path '${params.TARGET_PATH}' | Out-Null
+                            }
+                            Remove-Item -Path '${params.TARGET_PATH}\\*' -Include *.* -Force -ErrorAction SilentlyContinue
+                        """
+                        println("Deploy folder preparado en ${params.TARGET_PATH}")
+                    }
+                  }
             }
         }
         stage('Copy new JAR to deploy folder') {
