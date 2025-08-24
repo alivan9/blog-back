@@ -54,20 +54,15 @@ pipeline {
         }
         stage('Clean-Up deploy folder') {
             steps {
-                // script {
-                //     emptyFolder("${params.TARGET_PATH}")
-                // }
-                 steps {
-                    script {
-                        powershell """
-                            if (-Not (Test-Path '${params.TARGET_PATH}')) {
-                                New-Item -ItemType Directory -Path '${params.TARGET_PATH}' | Out-Null
-                            }
-                            Remove-Item -Path '${params.TARGET_PATH}\\*' -Include *.* -Force -ErrorAction SilentlyContinue
-                        """
-                        println("Deploy folder preparado en ${params.TARGET_PATH}")
-                    }
-                  }
+                script {
+                    powershell """
+                        if (-Not (Test-Path '${params.TARGET_PATH}')) {
+                            New-Item -ItemType Directory -Path '${params.TARGET_PATH}' | Out-Null
+                        }
+                        Remove-Item -Path '${params.TARGET_PATH}\\*' -Include *.* -Force -ErrorAction SilentlyContinue
+                    """
+                    println("Deploy folder preparado en ${params.TARGET_PATH}")
+                }
             }
         }
         stage('Copy new JAR to deploy folder') {
@@ -114,9 +109,14 @@ pipeline {
 *                                FUNCTIONS SECTION                                               *
 **************************************************************************************************/
 def emptyFolder(String path) {
-    String command = "Remove-Item -Path '${path}\\*' -Include *.* -Force"
+    String command = """
+        if (-Not (Test-Path '${path}')) {
+            New-Item -ItemType Directory -Path '${path}' | Out-Null
+        }
+        Remove-Item -Path '${path}\\*' -Include *.* -Force -ErrorAction SilentlyContinue
+    """
     powershell(returnStdout:true, script:command)
-    println('CleanUp folder done.')
+    println("CleanUp folder done at ${path}.")
 }
 
 def copyFile(String sourcePath, String targetPath) {
