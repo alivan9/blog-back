@@ -85,6 +85,7 @@ pipeline {
                             "SERVER_PORT=8081"
                         ]) {
                             bat """
+                                echo SPRING_DATASOURCE_PASSWORD=${env.DB_PASS}
                                 echo Ejecutando: ${params.TARGET_PATH}\\${env.BUILD_NAME}
                                 java -jar "${params.TARGET_PATH}\\${env.BUILD_NAME}"
                             """
