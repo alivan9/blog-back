@@ -3,10 +3,8 @@ pipeline {
     options { timestamps() }
 
     parameters {
-        separator(name: "GITHUB_CONFIGURATION", sectionHeader: "GITHUB CONFIGURATION")
         string(name: 'GITHUB_BRANCH', defaultValue: 'master', description: 'GitHub Branch name')
         string(name: 'GITHUB_URL', defaultValue: "https://github.com/Jorge-Urquiza/blog-back.git", description: 'GitHub URL project')
-        separator(name: "DEPLOYMENT_CONFIGURATION", sectionHeader: "DEPLOYMENT CONFIGURATION")
         string(name: 'TARGET_PATH', defaultValue: "C:\\deploy\\blog-back", description: 'Target folder path for JAR')
     }
 
